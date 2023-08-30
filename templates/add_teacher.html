@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container" style="max-width: 700px;" >
+    <h1 class="h3">Add Teacher</h1>
+    <form action="#" method="post"  class="mt-3" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Teacher Name: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="teacher-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Date of Birth: </label>
+                </td>
+                <td class="p-2">
+                    <input type="date" class="form-control" name="date-of-birth" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Gender:</label>
+                </td>
+                <td class="p-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>                
+                    </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Religion:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="religion" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Contact Number:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="contact-number" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Email: </label>
+                </td>
+                <td class="p-2">
+                    <input type="email" class="form-control" name="email" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Qualifications:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="qualifications" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Address:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="address" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Status: </label>
+                </td>
+                <td class="p-2">
+                    <select name="status" class="form-control" id="">
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                                  
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    
+                    <input type="submit" class="btn btn-outline-primary mt-3" value="Submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<h1 class="h3" >
+    {{course.course_name}}
+</h1>
+{% for student in students %}
+<a href="{% url 'single-student' student.id %}">
+<div class="card">
+    <div class="card-body">
+        {{student.student_name}}
+    </div>
+</div>
+</a>
+{% endfor %}
+
+{% endblock %}

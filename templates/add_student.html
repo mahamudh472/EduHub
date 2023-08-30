@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block body %}
+
+<div class="container" style="max-width: 700px;" >
+    <h1 class="h3">Add Student</h1>
+    <form action="#" method="post"  class="mt-3" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Student Id: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="student-id" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Student Name: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="student-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Date of Birth: </label>
+                </td>
+                <td class="p-2">
+                    <input type="date" class="form-control" name="date-of-birth" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Gender:</label>
+                </td>
+                <td class="p-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Religion:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="religion" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Contact Number:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="contact-number" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Father's Name: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="father-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Mother's Name:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="mother-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Home Number:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="home-number" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Address:</label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="address" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Course: </label>
+                </td>
+                <td class="p-2">
+                    <select name="course" id="" class="form-control">
+                        {% for course in course_list %}
+                        <option value="{{course_list.course_name}}">{{course.course_name}}</option>
+                        {% endfor %}
+                    </select>
+                        
+                                  
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    
+                    <input type="submit" class="btn btn-outline-primary mt-3" value="Submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

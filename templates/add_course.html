@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="container" style="max-width: 700px;" >
+    <h1 class="h3">Add Course</h1>
+    <form action="#" method="post"  class="mt-3" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Course Name: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="course-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Description </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="desc" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Fee Type:</label>
+                </td>
+                <td class="p-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fee-type" id="inlineRadio1" value="one-time">
+                        <label class="form-check-label" for="inlineRadio1">One time</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fee-type" id="inlineRadio2" value="monthly">
+                        <label class="form-check-label" for="inlineRadio2">Monthly</label>                
+                    </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Fee:</label>
+                </td>
+                <td class="p-2">
+                    <input type="number" class="form-control" name="fee" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td>
+                    
+                    <input type="submit" class="btn btn-outline-primary mt-3" value="Submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="contaianer ml-4">
+    <div class="d-flex">
+        <img src="{% static 'img/student.png' %}" alt="" height="100">
+        <div class="h4 mt-4 ml-4">
+            {{student.student_name}}
+            <div class="h6">{{student.student_id}}</div>
+        </div>
+
+    </div>
+
+    <table class="table mt-4" style="max-width: 500px;">
+        <tr>
+            <td class="col">Course:</td>
+            <td class="col">{{student.course}}</td>
+        </tr>
+        <tr>
+            <td class="col">Date Of Birth:</td>
+            <td class="col">{{student.date_of_birth}}</td>
+        </tr>
+        <tr>
+            <td class="col">Gender:</td>
+            <td class="col">{{student.gender}}</td>
+        </tr>
+        <tr>
+            <td class="col">RELIGION:</td>
+            <td class="col">{{student.religion}}</td>
+        </tr>
+        <tr>
+            <td class="col">CONTACT NUMBER:</td>
+            <td class="col">{{student.contact_number}}</td>
+        </tr>
+        <tr>
+            <td class="col">FATHER'S NAME:</td>
+            <td class="col">{{student.father_name}}</td>
+        </tr>
+        <tr>
+            <td class="col">Mother's Name:</td>
+            <td class="col">{{student.mother_name}}</td>
+        </tr>
+        <tr>
+            <td class="col">Home Number:</td>
+            <td class="col">{{student.home_number}}</td>
+        </tr>
+        <tr>
+            <td class="col">Address:</td>
+            <td class="col">{{student.address}}</td>
+        </tr>
+        
+    </table>
+
+</div>
+
+
+{% endblock %}
