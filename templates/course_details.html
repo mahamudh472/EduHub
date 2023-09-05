@@ -5,6 +5,7 @@
 <h1 class="h3" >
     {{course.course_name}}
 </h1>
+{% if students %}
 {% for student in students %}
 <a href="{% url 'single-student' student.id %}">
 <div class="card">
@@ -14,5 +15,11 @@
 </div>
 </a>
 {% endfor %}
-
+{% else %}
+<div class="card">
+    <div class="card-body">
+        No students found
+    </div>
+</div>
+{% endif %}
 {% endblock %}

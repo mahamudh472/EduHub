@@ -94,5 +94,5 @@ def single_student(request, id):
     student = Student.objects.get(id=id)
     return render(request, 'single_student.html', {'student': student})
 
-def custom_404(request, exception):
+def custom_404(request):
     return render(request, '404.html', status=404)

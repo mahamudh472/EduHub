@@ -31,6 +31,7 @@ urlpatterns = [
     path('add-course', views.add_course, name='add-course'),
     path('course-list', views.course_list, name='course-list'),
     path('course-details/<int:id>', views.course_details, name='course-details'),
-    path('student/<int:id>', views.single_student, name="single-student")
+    path('student/<int:id>', views.single_student, name="single-student"),
+    path('error', views.custom_404, name='error')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
