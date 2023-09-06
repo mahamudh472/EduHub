@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from main.models import Student, Course, Teacher
 from django.contrib import messages 
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
-
+@login_required(login_url='login')
 def index(request):
     total_students = Student.objects.count()
     total_teachers = Teacher.objects.count()
@@ -13,6 +16,51 @@ def index(request):
         "total_courses": total_courses
     }
     return render(request, 'index.html', context)
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = User.objects.get(username=username)
+        if user is not None:
+            if user.check_password(password):
+                authenticate(request, username=username, password=password)
+                login(request, user)
+                messages.add_message(request, messages.SUCCESS, "Login Successfully")
+                return redirect('index')
+            else:
+                messages.add_message(request, messages.ERROR, "Password is incorrect")
+                return redirect('login')
+        else:
+            messages.add_message(request, messages.ERROR, "Username is incorrect")
+            return redirect('login')
+    return render(request, 'login.html')
+def logout_view(request):
+    logout(request)
+    messages.add_message(request, messages.SUCCESS, "Logout Successfully")
+    return redirect('login')
+
+def register(request):
+    if request.method == "POST":
+        first_name = request.POST["first-name"]
+        last_name = request.POST["last-name"]
+        email = request.POST["email"]
+        username = request.POST["username"]
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm-password"]
+        if password == confirm_password:
+            user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+            user.save()
+            messages.add_message(request, messages.SUCCESS, "Account created successfully")
+            return redirect('login')
+        else:
+            messages.add_message(request, messages.ERROR, "Password and Confirm Password does not match")
+            return redirect('register')
+        
+    return render(request, 'register.html')
+
+def forgot_password(request):
+    return render(request, 'forgot-password.html')
 
 def student_list(request):
     students = Student.objects.all() 
