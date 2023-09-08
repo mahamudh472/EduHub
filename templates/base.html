@@ -52,7 +52,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -104,18 +104,9 @@
                     <i class="fas fa-fw fa-graduation-cap"></i>
                     <span>Course List</span></a>
             </li>
+            
             <li class="nav-item">
-                <a class="nav-link py-2" href="{% url 'error' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Monthly Fee</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{% url 'error' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Marksheet</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link py-2" href="{% url 'error' %}">
+                <a class="nav-link py-2" href="{% url 'testimonial' %}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Testimonial</span></a>
             </li>
@@ -285,7 +276,16 @@
 
     <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-
+    <script>
+        // sidebar toggle active
+        $(document).ready(function () {
+            var url = window.location;
+            $('ul.navbar-nav a[href="' + url + '"]').parent().addClass('active');
+            $('ul.navbar-nav a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+        });
+    </script>
     {% block footer %}{% endblock %}
 </body>
 

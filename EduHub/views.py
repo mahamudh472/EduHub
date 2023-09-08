@@ -141,6 +141,8 @@ def course_details(request, id):
 def single_student(request, id):
     student = Student.objects.get(id=id)
     return render(request, 'single_student.html', {'student': student})
+def testimonial(request):
+    return render(request, 'testimonial.html')
 
-def custom_404(request):
+def custom_404(request, exceptions):
     return render(request, '404.html', status=404)
