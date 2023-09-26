@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: EduHub
-    buildCommand: "./build.sh"
-    env: python
-    startCommand: "gunicorn EduHub.wsgi:application"
