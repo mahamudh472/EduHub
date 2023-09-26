@@ -5,15 +5,31 @@
 
 <div class="container" style="max-width: 700px;" >
     <h1 class="h3">Add Teacher</h1>
-    <form action="#" method="post"  class="mt-3" >
+    <form action="#" method="post" enctype="multipart/form-data"  class="mt-3" >
         {% csrf_token %}
         <table>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Picture: </label>
+                </td>
+                <td class="p-2">
+                    <input type="file" class="form-control-file" name="teacher-photo" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
             <tr>
                 <td class="p-2">
                     <label for="" class="form-label">Teacher Name: </label>
                 </td>
                 <td class="p-2">
                     <input type="text" class="form-control" name="teacher-name" id="" aria-describedby="helpId" placeholder="">
+                </td>
+            </tr>
+            <tr>
+                <td class="p-2">
+                    <label for="" class="form-label">Teacher Position: </label>
+                </td>
+                <td class="p-2">
+                    <input type="text" class="form-control" name="teacher-position" id="" aria-describedby="helpId" placeholder="">
                 </td>
             </tr>
             <tr>

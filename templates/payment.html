@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Payment</h1>
+        </div>
+    </div>
+</div>
+<!-- bootstrap body centterd card to show payment details -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Payment Details</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">
+                                <strong class="form-control-label">Student Id</strong>: <br>
+                                <strong class="form-control-label">Student name</strong>: <br>
+                                <strong>Course name</strong>: <br>
+                                <strong>Course fee</strong>: <br>
+                                <strong>Course type</strong>: <br>
+                                <strong>Payment status</strong>: <br>
+                            </div>
+                            <div class="col-6">
+                                {{student.student_id}} <br>
+                                {{student.student_name}} <br>
+                                {{student.course.course_name}} <br>
+                                {{student.course.fee}} <br>
+                                {{student.course.fee_type}} <br>
+                                <div class="text-capitalize text-white">
+                                    {% if student.course.fee_type == "one-time" %}
+                                    {% if student.onetimefee.status == True %}
+                                    <div class="badge badge-success p-1">Paid</div>
+                                    {% else %}
+                                    <div class="badge badge-danger p-1">Unpaid</div>
+                                    {% endif %}
+                                    {% else %}
+                                    {% if status == "Paid" %}
+                                    <div class="badge badge-success p-1">{{status}}</div>
+                                    {% else %}
+                                    <div class="badge badge-danger p-1">{{status}}</div>
+                                    {% endif %}
+                                    {% endif %}
+                                </div> <br>
+                            </div>
+                        </div>
+                        <form action="{% url 'pay' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row mt-3">
+
+                                {% if student.course.fee_type == "one-time" %}
+                                <div class="col-6">
+                                    <input type="hidden" name="id" value="{{student.student_id}}">
+                                    <input type="hidden" name="fee-type" value="{{student.course.fee_type}}">
+                                    <input type="number" name="" id="" value="{{student.course.fee}}" disabled
+                                        class="form-control">
+                                </div>
+                                {% else %}
+                                <div class="col-6">
+                                    <input type="hidden" name="id" value="{{student.student_id}}">
+                                    <input type="hidden" name="fee-type" value="{{student.course.fee_type}}">
+                                    <select name="month_name" id="" class="form-control">
+                                        {% for month in months %}
+                                        <option class="form-control text-capitalize" value="{{month.month_name}}">
+                                            {{month.month_name}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                {% endif %}
+
+                                <div class="col-6"><input type="submit" value="Pay" name="" id=""
+                                        class="btn btn-success">
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

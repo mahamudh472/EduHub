@@ -1,4 +1,6 @@
 from django.db import models
+import os
+from django.utils import timezone
 
 # ---------------------------------------------
 # Managinig Students, Teachers and Course Data
@@ -12,14 +14,14 @@ class Course(models.Model):
     course_name = models.CharField(max_length=100, null=True, blank=True)
     desc = models.TextField(null=True, blank=True, default='N/A')
     fee_type = models.CharField(max_length=20, choices=FEE_TYPES)
-    fee = models.IntegerField()
-
+    fee = models.IntegerField(null=True, blank=True)
+    first_roll = models.IntegerField(default=1)
     def __str__(self) -> str:
         return self.course_name
     
     def student_count(self):
         return self.student_set.count()
-
+    
 
 class Student(models.Model):
     GENDERS = (
@@ -31,7 +33,8 @@ class Student(models.Model):
         ('running', 'Running'),
         ('finished', 'Finished')
     )
-    student_id = models.CharField(max_length=20, null=True, blank=True)
+    student_id = models.IntegerField(unique=True, null=True, blank=True)
+    student_photo = models.ImageField(upload_to='student_photos/', null=True, blank=True)
     student_name = models.CharField(max_length=40, null=True, blank=True)
     date_of_birth = models.DateField(blank=True, null=True, default='N/A')
     gender = models.CharField(max_length=20,choices=GENDERS, null=True, blank=True, default='N/A')
@@ -43,8 +46,28 @@ class Student(models.Model):
     address = models.CharField(max_length=20, null=True, blank=True, default='N/A')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
     status = models.CharField(max_length=15, choices=STATUS, default="N/A")
+
+    def get_status(self):
+        temp = True
+        for i in self.monthlyfee_set.all():
+            if i.status == False:
+                temp = False
+            
+        return temp
+
+
+
     def __str__(self) -> str:
         return self.student_name
+    
+    def delete(self, *args, **kwargs):
+        # Delete the associated photo when the student is deleted
+        if self.student_photo:
+            # Delete the file from the media folder
+            if os.path.isfile(self.student_photo.path):
+                os.remove(self.student_photo.path)
+
+        super().delete(*args, **kwargs)
 
 class Teacher(models.Model):
     GENDERS = (
@@ -56,7 +79,9 @@ class Teacher(models.Model):
         ('available', 'Available'),
         ('unavailable', 'Unavailable')
     )
+    teacher_photo = models.ImageField(upload_to='teacher_photos', null=True, blank=True)
     teacher_name = models.CharField(max_length=50, null=True, blank=True)
+    teacher_position = models.CharField(max_length=50, null=True, blank=True)
     date_of_birth = models.DateField(blank=True, null=True, default='N/A')
     gender = models.CharField(max_length=20, choices=GENDERS, null=True, blank=True, default='N/A')
     religion = models.CharField(max_length=20, null=True, blank=True, default='N/A')
@@ -69,6 +94,14 @@ class Teacher(models.Model):
     def __str__(self) -> str:
         return self.teacher_name
 
+    def delete(self, *args, **kwargs):
+        # Delete the associated photo when the student is deleted
+        if self.teacher_photo:
+            # Delete the file from the media folder
+            if os.path.isfile(self.teacher_photo.path):
+                os.remove(self.teacher_photo.path)
+
+        super().delete(*args, **kwargs)
 
 # ---------------------------------------------
 # Managinig Fee Status
@@ -76,35 +109,34 @@ class Teacher(models.Model):
 
 class OneTimeFee(models.Model):
     name = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    students = models.ManyToManyField(Student, through='Payment')
+    student = models.OneToOneField(Student, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.name
-    
-
-class Month(models.Model):
-    name = models.CharField(max_length=20)
-
-    def __str__(self) -> str:
-        return self.name
+MONTHS = (
+    ('january', 'January'),
+    ('february', 'February'),
+    ('march', 'March'),
+    ('april', 'April'),
+    ('may', 'May'),
+    ('june', 'June'),
+    ('july', 'July'),
+    ('august', 'August'),
+    ('september', 'September'),
+    ('october', 'October'),
+    ('november', 'November'),
+    ('december', 'December'),
+)
 
 class MonthlyFee(models.Model):
-    name = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    months = models.ManyToManyField(Month)
-    students = models.ManyToManyField(Student, through='Payment')
+    month_name = models.CharField(max_length=100)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, blank=True, null=True)
+    status = models.BooleanField(default=False)
 
-
-class Payment(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    fee = models.ForeignKey('OneTimeFee', on_delete=models.CASCADE, null=True, blank=True)
-    monthly_fee = models.ForeignKey('MonthlyFee', on_delete=models.CASCADE, null=True, blank=True)
-    month = models.ForeignKey(Month, on_delete=models.CASCADE)
-    paid = models.BooleanField(default=False)
-    payment_date = models.DateField()
-
-
+    def __str__(self) -> str:
+        return self.month_name    
+    
 # ---------------------------------------------
 # Managinig Exams and Results
 # ---------------------------------------------

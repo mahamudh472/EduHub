@@ -5,7 +5,11 @@
 
 <div class="contaianer ml-4">
     <div class="d-flex">
+        {% if student.student_photo %}
+        <img src="{{student.student_photo.url}}" alt="" height="100">
+        {% else %}
         <img src="{% static 'img/student.png' %}" alt="" height="100">
+        {% endif %}
         <div class="h4 mt-4 ml-4">
             {{student.student_name}}
             <div class="h6">{{student.student_id}}</div>

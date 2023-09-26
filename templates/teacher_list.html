@@ -35,12 +35,16 @@
                         
                         {% for teacher in teachers %}
                         <tr>
-                            <td>{{teacher.teacher_name}}</td>
+                            <td>
+                                <a href="{% url 'single-teacher' teacher.id %}">
+                                    {{teacher.teacher_name}}
+                                </a>
+                            </td>
                             <td>{{teacher.date_of_birth}}</td>
                             <td>{{teacher.gender}}</td>
                             <td>{{teacher.religion}}</td>
                             <td>{{teacher.contact_number}}</td>
-                            <td>{{teacher.email}}</td>
+                            <td class="text-lowercase">{{teacher.email}}</td>
                             <td>{{teacher.qualifications}}</td>
                             <td>{{teacher.address}}</td>
                             <td>{{teacher.status}}</td>    

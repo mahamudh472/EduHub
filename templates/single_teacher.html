@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="contaianer ml-4">
+    <div class="d-flex">
+        {% if teacher.teacher_photo %}
+        <img src="{{teacher.teacher_photo.url}}" alt="" height="100">
+        {% else %}
+        <img src="{% static 'img/student.png' %}" alt="" height="100">
+        {% endif %}
+        <div class="h4 mt-4 ml-4">
+            {{teacher.teacher_name}}
+            <div class="h6">{{teacher.teacher_position}}</div>
+        </div>
+
+    </div>
+
+    <table class="table mt-4" style="max-width: 500px;">
+        
+        <tr>
+            <td class="col">Date Of Birth:</td>
+            <td class="col">{{teacher.date_of_birth}}</td>
+        </tr>
+        <tr>
+            <td class="col">Gender:</td>
+            <td class="col">{{teacher.gender}}</td>
+        </tr>
+        <tr>
+            <td class="col">RELIGION:</td>
+            <td class="col">{{teacher.religion}}</td>
+        </tr>
+        <tr>
+            <td class="col">CONTACT NUMBER:</td>
+            <td class="col">{{teacher.contact_number}}</td>
+        </tr>
+        <tr>
+            <td class="col">EMAIL:</td>
+            <td class="col text-lowercase">{{teacher.email}}</td>
+        </tr>
+        <tr>
+            <td class="col">Qualifications:</td>
+            <td class="col">{{teacher.qualifications}}</td>
+        </tr>
+        <tr>
+            <td class="col">Address:</td>
+            <td class="col">{{teacher.address}}</td>
+        </tr>
+        <tr>
+            <td class="col">status:</td>
+            <td class="col">{{teacher.status}}</td>
+        </tr>
+        
+    </table>
+
+</div>
+
+
+
+{% endblock %}

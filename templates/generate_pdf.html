@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML to PDF</title>
+</head>
+<body>
+  <div id="content">
+    <h1>This is the content to be converted to PDF</h1>
+    <p>Some text and content here.</p>
+  </div>
+  <button onclick="printDiv()">Print to PDF</button>
+</body>
+<script>
+    function printDiv() {
+      // Get the HTML content of the specific div
+      const content = document.getElementById('content').innerHTML;
+  
+      // Open a new window and set its content to the div's HTML
+      const printWindow = window.open('', '', 'width=600,height=600');
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print</title>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+  
+      // Trigger the print function of the new window
+      printWindow.print();
+    }
+  </script>
+  
+</html>

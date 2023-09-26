@@ -37,5 +37,9 @@ urlpatterns = [
     path('forgot-password/', views.forgot_password, name='forgot-password'),
     path('logout/', views.logout_view, name='logout'),
     path('testimonial/', views.testimonial, name='testimonial'),
+    path('teacher/<int:id>', views.single_teacher, name='single-teacher'),
+    path('download/', views.generate_pdf, name='download'),
+    path('payment/', views.payment, name='payment'),
+    path('pay', views.pay, name='pay')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,17 +2,36 @@
 {% load static %}
 
 {% block body %}
-<h1 class="h3" >
+<h1 class="h3">
     {{course.course_name}}
 </h1>
 {% if students %}
 {% for student in students %}
 <a href="{% url 'single-student' student.id %}">
-<div class="card">
-    <div class="card-body">
-        {{student.student_name}}
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">{{student.student_name}}</div>
+                <div class="col-6 text-right">
+                    {% if student.course.fee_type == "one-time" %}
+                    {% if student.onetimefee.status == True %}
+                    <div class="badge badge-success p-1">Paid</div>
+                    {% else %}
+                    <div class="badge badge-danger p-1">Unpaid</div>
+                    {% endif %}
+                    {% else %}
+                    {% with status=student.get_status %}
+                    {% if status %}<div class="badge badge-success p-1">Paid</div>
+                    {% else %}
+                    <div class="badge badge-danger p-1">Unpaid</div>
+                    {% endif %}
+                    {% endwith %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </a>
 {% endfor %}
 {% else %}
